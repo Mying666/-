@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+        body{
+            margin: 0;
+            overflow: hidden;
+        }
+        .box{
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+        }
+        .box::move{
+            
+        }
+	</style>
+</head>
+<body>
+	<div class="box"></div>
+    <script src="createjs/easeljs-1.0.0.min.js"></script>
+    <script src="createjs/TweenMax.js"></script>
+	<script src="js/test.js"></script>
+	<script>
+		let box = document.querySelector('.box')
+		let demo = new relation({
+			dom: box,
+			data: {
+                point: [
+                    {type: 'home', pos: [300, 500]},
+                    {type: 'com', pos: [500, 500]},
+                    {type: 'set', pos: [700, 300]},
+                    {type: 'point', pos: [300, 300]}
+                ],
+                line: [
+                    [[300, 500], [500, 500]],
+                    [[300, 500], [700, 300]],
+                    [[700, 300], [300, 300]],
+                    [[500, 500], [300, 300]]
+                ]
+            }
+		})
+	</script>
+</body>
+</html>
