@@ -46,6 +46,8 @@ class relation {
             regY: 0,
             moveSensitivity: 1, //平移灵敏度
             zoom: 1,
+            maxZoom: 5,
+            minZoom: 0.2,
             zoomSensitivity: 1.5 //缩放灵敏度
         }
         // 创建舞台
@@ -144,12 +146,19 @@ class relation {
             } else {
                 me.moveAndZoom.zoom /= me.moveAndZoom.zoomSensitivity
             }
+            // 缩放限制
+            if (me.moveAndZoom.zoom > me.moveAndZoom.maxZoom) {
+                me.moveAndZoom.zoom = me.moveAndZoom.maxZoom
+            }
+            if (me.moveAndZoom.zoom < me.moveAndZoom.minZoom) {
+                me.moveAndZoom.zoom = me.moveAndZoom.minZoom
+            }
             // me.moveAndZoom.regX = me.moveAndZoom.regX * me.moveAndZoom.zoom - e.pageX
             // me.moveAndZoom.regY = me.moveAndZoom.regY * me.moveAndZoom.zoom - e.pageY
             // console.log(-me.moveAndZoom.regX - me.moveAndZoom.regX * 2);
             me.stage.set({
-                regX: me.moveAndZoom.regX * me.moveAndZoom.zoom,
-                regY: me.moveAndZoom.regY * me.moveAndZoom.zoom,
+                // regX: me.moveAndZoom.regX * me.moveAndZoom.zoom,
+                // regY: me.moveAndZoom.regY * me.moveAndZoom.zoom,
                 scale: me.moveAndZoom.zoom
             })
         })
