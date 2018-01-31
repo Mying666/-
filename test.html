@@ -31,16 +31,23 @@
 			dom: box,
 			data: {
                 point: [
-                    {type: 'home', pos: [300, 500]},
-                    {type: 'com', pos: [500, 500]},
-                    {type: 'set', pos: [700, 300]},
-                    {type: 'point', pos: [300, 300]}
+                    {name: 'a', type: 'home', pos: [300, 500]},
+                    {name: 'b', type: 'com', pos: [500, 500]},
+                    {name: 'c', type: 'set', pos: [700, 300]},
+                    {name: 'd', type: 'home', pos: [100, 100]},
+                    {name: 'e', type: 'com', pos: [300, 600]},
+                    {name: 'f', type: 'set', pos: [400, 300]},
+                    {name: 'g', type: 'point', pos: [300, 800]}
                 ],
                 line: [
-                    [[300, 500], [500, 500]],
-                    [[300, 500], [700, 300]],
-                    [[700, 300], [300, 300]],
-                    [[500, 500], [300, 300]]
+                    ['a', 'b'],
+                    ['b', 'c'],
+                    ['a', 'c'],
+                    ['c', 'd'],
+                    ['d', 'g'],
+                    ['d', 'f'],
+                    ['e', 'g'],
+                    ['e', 'a']
                 ]
             }
 		})
