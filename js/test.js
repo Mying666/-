@@ -116,12 +116,12 @@ class relation {
         let me = this
         // 鼠标拖动事件
         me.dom.addEventListener('mousedown', e => {
-            me.dom.style.cursor = 'url("../images/closedhand.cur"), auto'
+            me.dom.style.cursor = 'url("./images/closedhand.cur"), auto'
             me.moveAndZoom.x1 = e.pageX
             me.moveAndZoom.y1 = e.pageY
             this.dom.addEventListener('mousemove', mousemove)
         })
-        me.dom.style.cursor = 'url("../images/openhand.cur"), auto'
+        me.dom.style.cursor = 'url("./images/openhand.cur"), auto'
         const mousemove = e => {
             // 一定要除以放大倍数，不然放大之后就等着拖拽飞起吧~
             me.moveAndZoom.regX += (me.moveAndZoom.x1 - e.pageX) / me.moveAndZoom.zoom / me.moveAndZoom.moveSensitivity
@@ -135,7 +135,7 @@ class relation {
         }
         me.dom.addEventListener('mouseup', e => {
             this.dom.removeEventListener('mousemove', mousemove)
-            me.dom.style.cursor = 'url("../images/openhand.cur"), auto'
+            me.dom.style.cursor = 'url("./images/openhand.cur"), auto'
             // console.log(me.moveAndZoom.regX, me.moveAndZoom.regY);
         })
         // 缩放
