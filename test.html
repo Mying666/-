@@ -15,16 +15,13 @@
             height: 100vh;
             background: #000;
         }
-        .box::move{
-            
-        }
 	</style>
 </head>
 <body>
 	<div class="box"></div>
     <script src="createjs/easeljs-1.0.0.min.js"></script>
     <script src="createjs/TweenMax.js"></script>
-	<script src="js/test.js"></script>
+	<script src="js/test.js?v=1"></script>
 	<script>
 		let box = document.querySelector('.box')
 		let demo = new relation({
@@ -35,9 +32,9 @@
                     {name: 'b', type: 'com', pos: [500, 500]},
                     {name: 'c', type: 'set', pos: [700, 300]},
                     {name: 'd', type: 'home', pos: [100, 100]},
-                    {name: 'e', type: 'com', pos: [300, 600]},
+                    {name: 'e', type: 'com', pos: [800, 600]},
                     {name: 'f', type: 'set', pos: [400, 300]},
-                    {name: 'g', type: 'point', pos: [300, 800]}
+                    {name: 'g', type: 'point', pos: [700, 800]}
                 ],
                 line: [
                     ['a', 'b'],
