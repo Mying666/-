@@ -49,7 +49,7 @@ class relation {
             zoom: 1,
             maxZoom: 5,
             minZoom: 0.2,
-            zoomSensitivity: 1.5 //缩放灵敏度
+            zoomSensitivity: 1.2 //缩放灵敏度
         }
         // 创建舞台
         this.stage = new createjs.Stage(this.canvas)
@@ -86,30 +86,48 @@ class relation {
             me.addNode(p)
         })
         this.data.line.forEach(l => {
-            me.drawArrows(...l)
+            me.drawArrows(l)
         })
     }
     /**
      * 画箭头
      * from,to 为起止点名称
     */
-    drawArrows (from, to) {
-        let me = this,
-            fromPoint = me.stage.getChildByName(from),
-            toPoint = me.stage.getChildByName(to),
-            start = [fromPoint.x, fromPoint.y],
-            end = [toPoint.x, toPoint.y];
-        if (fromPoint.alpha === 0) {
-            // 图片显示
-            let M1 = new TimelineMax()
-            M1.to(fromPoint, me.animationOp.imgShowTime, {
-                alpha: 1
-            })
-            me.timeLine.add(M1, me.duration);
-            me.duration += me.animationOp.imgShowTime
+    drawArrows (info) {
+        let me = this
+        if (info.type && info.from && info.to) {
+            // type 1 多个起点一个终点
+            if (info.type === '1') {
+                let toPoint = me.stage.getChildByName(info.to[0])
+                // 显示起点
+                me.ifShow(info.from)
+                info.from.forEach(f => {
+                    me.drawArrowsBase(me.stage.getChildByName(f),toPoint)
+                })
+                // 所有画线加入动画时间轴
+                me.duration += me.animationOp.lineTime
+                // 显示终点
+                me.ifShow(info.to)
+            } else if (info.type === '2') {
+                let fromPoint = me.stage.getChildByName(info.from[0])
+                // 显示起点
+                me.ifShow(info.from)
+                info.to.forEach(t => {
+                    me.drawArrowsBase(fromPoint, me.stage.getChildByName(t))
+                })
+                // 所有画线加入动画时间轴
+                me.duration += me.animationOp.lineTime
+                // 显示终点
+                me.ifShow(info.to)
+            }
         }
-        let shape = new createjs.Shape()
-        this.stage.addChild(shape)
+    }
+    drawArrowsBase (from, to) {
+        let me = this
+        let start = [from.x, from.y],
+            end = [to.x, to.y],
+            shape = new createjs.Shape();
+        me.stage.addChild(shape)
         // 箭头长度
         let headlen = me.option.headlen
         // 箭头角度
@@ -140,17 +158,27 @@ class relation {
             }
         })
         me.timeLine.add(L1, me.duration);
-        me.duration += me.animationOp.lineTime
-        // 判断结束点是否已经显示,未显示加入动画
-        if (toPoint.alpha === 0) {
-            // 图片显示
-            let M2 = new TimelineMax()
-            M2.to(toPoint, me.animationOp.imgShowTime, {
-                alpha: 1
-            })
-            me.timeLine.add(M2, me.duration);
-            me.duration += me.animationOp.imgShowTime
-        }
+    }
+    // 判断该节点是否已经显示
+    ifShow (points) {
+        let me = this
+        let plus = false
+        points.forEach(name => {
+            let point = me.stage.getChildByName(name)
+            if (point.alpha === 0) {
+                plus = true
+                // 图片显示
+                let M1 = new TimelineMax()
+                M1.to(point, me.animationOp.imgShowTime, {
+                    alpha: 1
+                })
+                me.timeLine.add(M1, me.duration);
+            }
+        })
+        // 如果有需要显示动画图片
+        if (plus) {
+            me.duration += me.animationOp.imgShowTime 
+        }      
     }
     /**
      * 添加节点
