@@ -33,18 +33,52 @@
                     {name: 'c', type: 'set', pos: [700, 300]},
                     {name: 'd', type: 'home', pos: [100, 100]},
                     {name: 'e', type: 'com', pos: [800, 600]},
-                    {name: 'f', type: 'set', pos: [400, 300]},
-                    {name: 'g', type: 'point', pos: [700, 800]}
+                    {name: 'f', type: 'set', pos: [900, 300]},
+                    {name: 'g', type: 'point', pos: [700, 800]},
+                    {name: 'aa', type: 'home', pos: [200, 500]},
+                    {name: 'bb', type: 'com', pos: [500, 800]},
+                    {name: 'cc', type: 'set', pos: [550, 150]},
+                    {name: 'dd', type: 'home', pos: [200, 100]},
+                    {name: 'ee', type: 'com', pos: [400, 600]},
+                    {name: 'ff', type: 'set', pos: [780, 200]},
+                    {name: 'gg', type: 'point', pos: [100, 300]}
                 ],
                 line: [
-                    ['a', 'b'],
-                    ['b', 'c'],
-                    ['a', 'c'],
-                    ['c', 'd'],
-                    ['d', 'g'],
-                    ['d', 'f'],
-                    ['e', 'g'],
-                    ['e', 'a']
+                    {
+                        type: '1',
+                        from: ['a', 'b'],
+                        to: ['c']
+                    },
+                    {
+                        type: '1',
+                        from: ['aa', 'bb'],
+                        to: ['dd']
+                    },
+                    {
+                        type: '1',
+                        from: ['ee', 'ff', 'gg'],
+                        to: ['cc']
+                    },
+                    {
+                        type: '1',
+                        from: ['cc', 'bb'],
+                        to: ['aa']
+                    },
+                    {
+                        type: '2',
+                        from: ['cc'],
+                        to: ['aa', 'bb', 'c', 'dd', 'ee', 'ff', 'gg', 'a']
+                    },
+                    {
+                        type: '2',
+                        from: ['d'],
+                        to: ['e', 'a']
+                    },
+                    {
+                        type: '2',
+                        from: ['e'],
+                        to: ['a', 'g', 'f', 'b']
+                    }
                 ]
             }
 		})
